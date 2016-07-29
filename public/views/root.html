@@ -1,0 +1,44 @@
+<div>
+
+  Ma littel file exchange
+  <br/><br/>
+
+  <button ngf-select="selectFiles($files, $invalidFiles)" name="csv" initial-focus >Choose a file to upload</button>
+  <br/>
+
+  <div ng-show="!!files || !!errFiles">
+    <ul>
+      <li ng-repeat="f in files" style="font:smaller">{{f.name}} {{f.$errorParam}}
+        <span class="progress" ng-show="f.progress >= 0">
+          <div style="width:{{f.progress}}%"
+              ng-bind="f.progress + '%'"></div>
+        </span>
+      </li>
+      <li ng-repeat="f in errFiles" style="font:smaller">{{f.name}} {{f.$error}} {{f.$errorParam}}
+      </li>
+    </ul>
+    {{errorMsg}}
+    <br/>
+  </div>
+  <br/>
+  <button ng-click="continue()" class="btn btn-success" ng-disabled="!files || !!loading" translate>Fill 'er up</button>
+
+  <br/>
+  <br/>
+  Available for download:
+  <!-- <div ng-repeat="dlFile in downloadFiles">
+    <p>{{dlFile}}</p>
+  </div>
+
+  <br/> -->
+  <br/>
+
+  <abn-tree
+    tree-data = "downloadFiles"
+    tree-control = "dlControl"
+    on-select = "selectDL(branch)"
+  ></abn-tree>
+
+  <button ng-click="downloadSelected()" class="btn btn-success" ng-disabled="!isDownloadable()" translate>{{downloadText()}}</button>
+
+</div>
